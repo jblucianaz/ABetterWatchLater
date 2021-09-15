@@ -26,7 +26,10 @@ namespace ABetterWatchLaterAPI.Controllers
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
+            YouTubeController ytc = new YouTubeController();
+            string url = ytc.CreateGetURL(Constants.YouTube.VIDEOS, Constants.YouTube.API_KEY);
             var rng = new Random();
+            Console.Write(url);
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateTime.Now.AddDays(index),

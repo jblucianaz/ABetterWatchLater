@@ -1,0 +1,11 @@
+bin/
+obj/
+API/ABetterWatchLaterAPI/bin/Debug/netcoreapp3.1/ABetterWatchLaterAPI.dll
+API/ABetterWatchLaterAPI/bin/Debug/netcoreapp3.1/ABetterWatchLaterAPI.pdb
+API/ABetterWatchLaterAPI/obj/Debug/netcoreapp3.1/ABetterWatchLaterAPI.csproj.CoreCompileInputs.cache
+API/ABetterWatchLaterAPI/obj/Debug/netcoreapp3.1/ABetterWatchLaterAPI.csproj.FileListAbsolute.txt
+API/ABetterWatchLaterAPI/obj/Debug/netcoreapp3.1/ABetterWatchLaterAPI.csprojAssemblyReference.cache
+API/ABetterWatchLaterAPI/obj/Debug/netcoreapp3.1/ABetterWatchLaterAPI.dll
+API/ABetterWatchLaterAPI/obj/Debug/netcoreapp3.1/ABetterWatchLaterAPI.pdb
+API/.DS_Store
+API/ABetterWatchLaterAPI/Secret.cs
