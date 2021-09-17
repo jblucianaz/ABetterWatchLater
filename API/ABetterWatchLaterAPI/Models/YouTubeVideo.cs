@@ -14,6 +14,6 @@ namespace ABetterWatchLaterAPI
 
         public string Duration { get; set; }
 
-        public string[] Tags { get; set; };
+        public string[] Tags { get; set; }
     }
 }

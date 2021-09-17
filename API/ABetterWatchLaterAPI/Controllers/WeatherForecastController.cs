@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Net.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -23,6 +24,7 @@ namespace ABetterWatchLaterAPI.Controllers
             _logger = logger;
         }
 
+        /*
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
@@ -34,6 +36,16 @@ namespace ABetterWatchLaterAPI.Controllers
                 Summary = Summaries[rng.Next(Summaries.Length)]
             })
             .ToArray();
+        }*/
+
+        [HttpGet]
+        public string Get()
+        {
+            YouTubeController ytc = new YouTubeController();
+
+            return Task<string>.Run( () => {
+                return ytc.GetVideoInfo("Ks-_Mh1QhMc");
+            }).Result;
         }
     }
 }
