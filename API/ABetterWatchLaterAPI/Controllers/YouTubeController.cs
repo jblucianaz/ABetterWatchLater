@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Net.Http;
+using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -32,6 +33,45 @@ namespace ABetterWatchLaterAPI.Controllers
                 }
             }
             return videoInfo;
+        }
+
+        public YouTubeVideo ConvertJsonToYoutubeVideo(string jsonString) 
+        {
+            string id = "";
+            string title = "";
+            string channelId = "";
+            string duration = "";
+            List<string> tags = new List<string>(); 
+            
+            using (JsonDocument document = JsonDocument.Parse(jsonString))
+            {
+                JsonElement root = document.RootElement;
+                JsonElement itemElements = root.GetProperty("items");
+
+                foreach (JsonElement item in itemElements.EnumerateArray())
+                {
+                    if (item.TryGetProperty("id", out JsonElement idElement))
+                    {
+                        id = idElement.ToString();
+                    }
+                    if (item.TryGetProperty("snippet", out JsonElement snippetElement))
+                    {
+                        title = snippetElement.GetProperty("title").ToString();
+                        channelId = snippetElement.GetProperty("channelId").ToString();
+                        foreach (JsonElement tag in snippetElement.GetProperty("tags").EnumerateArray())
+                        {
+                            tags.Add(tag.GetString());
+                        }
+                    }
+                    if (item.TryGetProperty("contentDetails", out JsonElement contentDetailsElement))
+                    {
+                        duration = contentDetailsElement.GetProperty("duration").ToString();
+                    }
+                }
+            }
+            
+            YouTubeVideo youtubeVideo = new YouTubeVideo(id, title, channelId, duration, tags);
+            return youtubeVideo;
         }
     }
 }

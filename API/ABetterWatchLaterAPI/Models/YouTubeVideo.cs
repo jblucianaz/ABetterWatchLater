@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace ABetterWatchLaterAPI
 {
@@ -14,6 +15,15 @@ namespace ABetterWatchLaterAPI
 
         public string Duration { get; set; }
 
-        public string[] Tags { get; set; }
+        public List<string> Tags { get; set; }
+
+        public YouTubeVideo(string id, string title, string channelId, string duration, List<string> tags ) 
+        {
+            Id = id;
+            Title = title;
+            ChannelId = channelId;
+            Duration = duration;
+            Tags = tags;
+        }
     }
 }

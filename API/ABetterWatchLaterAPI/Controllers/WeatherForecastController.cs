@@ -42,10 +42,13 @@ namespace ABetterWatchLaterAPI.Controllers
         public string Get()
         {
             YouTubeController ytc = new YouTubeController();
-
-            return Task<string>.Run( () => {
+            string jsonResult = Task<string>.Run( () => {
                 return ytc.GetVideoInfo("Ks-_Mh1QhMc");
             }).Result;
+
+            ytc.ConvertJsonToYoutubeVideo(jsonResult);
+
+            return jsonResult;
         }
     }
 }
