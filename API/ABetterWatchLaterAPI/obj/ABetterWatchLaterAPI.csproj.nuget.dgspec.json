@@ -14,7 +14,7 @@
         "outputPath": "/Users/jb/Projets/Dev/ABetterWatchLater/API/ABetterWatchLaterAPI/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/jb/.nuget/NuGet/NuGet.Config"
+          "/Users/jb/.config/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -24,6 +24,7 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -35,6 +36,13 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "MySql.Data": {
+              "target": "Package",
+              "version": "[8.0.26, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -53,7 +61,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.1.412/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.401/RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -37,11 +37,12 @@ namespace ABetterWatchLaterAPI.Controllers
 
         public YouTubeVideo ConvertJsonToYoutubeVideo(string jsonString) 
         {
-            string id = "";
+            string videoId = "";
             string title = "";
             string channelId = "";
             string duration = "";
-            List<string> tags = new List<string>(); 
+            List<string> tags = new List<string>();
+            string thumbnail = "";
             
             using (JsonDocument document = JsonDocument.Parse(jsonString))
             {
@@ -52,7 +53,7 @@ namespace ABetterWatchLaterAPI.Controllers
                 {
                     if (item.TryGetProperty("id", out JsonElement idElement))
                     {
-                        id = idElement.ToString();
+                        videoId = idElement.ToString();
                     }
                     if (item.TryGetProperty("snippet", out JsonElement snippetElement))
                     {
@@ -62,6 +63,10 @@ namespace ABetterWatchLaterAPI.Controllers
                         {
                             tags.Add(tag.GetString());
                         }
+                        thumbnail = snippetElement
+                            .GetProperty("thumbnails")
+                            .GetProperty("standard")
+                            .GetProperty("url").ToString();
                     }
                     if (item.TryGetProperty("contentDetails", out JsonElement contentDetailsElement))
                     {
@@ -70,7 +75,8 @@ namespace ABetterWatchLaterAPI.Controllers
                 }
             }
             
-            YouTubeVideo youtubeVideo = new YouTubeVideo(id, title, channelId, duration, tags);
+            YouTubeVideo youtubeVideo = new YouTubeVideo(videoId, title, channelId, duration, tags, thumbnail);
+            Console.WriteLine(youtubeVideo.Thumbnail);
             return youtubeVideo;
         }
     }

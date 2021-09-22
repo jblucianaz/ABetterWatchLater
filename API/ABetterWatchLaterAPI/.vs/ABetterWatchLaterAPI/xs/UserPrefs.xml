@@ -1,0 +1,35 @@
+﻿<Properties StartupConfiguration="{EE890FE9-7F09-463D-B1D3-D238B73FE82A}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Controllers/YouTubeController.cs">
+    <Files>
+      <File FileName="Controllers/YouTubeController.cs" Line="76" Column="33" />
+      <File FileName="Models/YouTubeVideo.cs" Line="27" Column="31" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="ABetterWatchLaterAPI" expanded="True">
+            <Node name="ABetterWatchLaterAPI" expanded="True">
+              <Node name="Dependencies" expanded="True">
+                <Node name="PackageDependencies" expanded="True" />
+              </Node>
+              <Node name="Controllers" expanded="True">
+                <Node name="YouTubeController.cs" selected="True" />
+              </Node>
+              <Node name="Models" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.ABetterWatchLaterAPI PreferredExecutionTarget="/Applications/Safari.app" />
+</Properties>

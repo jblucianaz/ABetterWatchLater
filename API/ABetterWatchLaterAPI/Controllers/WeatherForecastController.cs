@@ -24,6 +24,8 @@ namespace ABetterWatchLaterAPI.Controllers
             _logger = logger;
         }
 
+        public static string[] Summaries1 => Summaries;
+
         /*
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
