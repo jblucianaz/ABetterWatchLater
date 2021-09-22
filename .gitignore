@@ -33,3 +33,4 @@ API/ABetterWatchLaterAPI/obj/Debug/netcoreapp3.1/staticwebassets/ABetterWatchLat
 API/ABetterWatchLaterAPI/obj/Debug/netcoreapp3.1/staticwebassets/ABetterWatchLaterAPI.StaticWebAssets.xml
 API/ABetterWatchLaterAPI/obj/Debug/netcoreapp3.1/ABetterWatchLaterAPI.assets.cache
 API/ABetterWatchLaterAPI/obj/Debug/netcoreapp3.1/ABetterWatchLaterAPI.csproj.FileListAbsolute.txt
+API/ABetterWatchLaterAPI/appsettings.Development.json

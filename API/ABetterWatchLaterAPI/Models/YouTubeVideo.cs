@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ABetterWatchLaterAPI
 {
@@ -30,6 +31,30 @@ namespace ABetterWatchLaterAPI
             Duration = duration;
             Tags = tags;
             Thumbnail = thumbnail;
+        }
+
+        public string ToFakeJson()
+        {
+            return @$"
+            VideoId: {VideoId},
+            Title: {Title},
+            ChannelId: {ChannelId},
+            Duration: {Duration},
+            Tags: {TagsAsString()},
+            Thumbnail: {Thumbnail}";
+        }
+
+        public string TagsAsString()
+        {
+            string strTags = string.Empty;
+
+            foreach (string tag in Tags)
+            {
+                if (tag != "") 
+                    strTags += $"{tag},";
+            }
+
+            return strTags.Remove(strTags.Length-1);
         }
     }
 }

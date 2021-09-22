@@ -37,12 +37,12 @@ namespace ABetterWatchLaterAPI.Controllers
 
         public YouTubeVideo ConvertJsonToYoutubeVideo(string jsonString) 
         {
-            string videoId = "";
-            string title = "";
-            string channelId = "";
-            string duration = "";
+            string videoId = string.Empty;
+            string title = string.Empty;
+            string channelId = string.Empty;
+            string duration = string.Empty;
             List<string> tags = new List<string>();
-            string thumbnail = "";
+            string thumbnail = string.Empty;
             
             using (JsonDocument document = JsonDocument.Parse(jsonString))
             {
@@ -76,7 +76,7 @@ namespace ABetterWatchLaterAPI.Controllers
             }
             
             YouTubeVideo youtubeVideo = new YouTubeVideo(videoId, title, channelId, duration, tags, thumbnail);
-            Console.WriteLine(youtubeVideo.Thumbnail);
+            
             return youtubeVideo;
         }
     }

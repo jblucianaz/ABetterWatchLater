@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using ABetterWatchLaterAPI.Models;
 
 namespace ABetterWatchLaterAPI
 {
@@ -26,6 +27,7 @@ namespace ABetterWatchLaterAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.Add(new ServiceDescriptor(typeof(DbManager), new DbManager(Configuration.GetConnectionString("DefaultConnection"))));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

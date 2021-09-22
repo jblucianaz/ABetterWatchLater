@@ -26,20 +26,6 @@ namespace ABetterWatchLaterAPI.Controllers
 
         public static string[] Summaries1 => Summaries;
 
-        /*
-        [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
-        {
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
-            })
-            .ToArray();
-        }*/
-
         [HttpGet]
         public string Get()
         {
@@ -48,9 +34,10 @@ namespace ABetterWatchLaterAPI.Controllers
                 return ytc.GetVideoInfo("Ks-_Mh1QhMc");
             }).Result;
 
-            ytc.ConvertJsonToYoutubeVideo(jsonResult);
+            YouTubeVideo video = ytc.ConvertJsonToYoutubeVideo(jsonResult);
 
-            return jsonResult;
+            //return jsonResult;
+            return video.ToFakeJson();
         }
     }
 }
