@@ -30,6 +30,10 @@ namespace ABetterWatchLaterAPI
             Thumbnail = thumbnail;
         }
 
+        public YouTubeVideo()
+        {
+        }
+
         public string ToFakeJson()
         {
             return @$"

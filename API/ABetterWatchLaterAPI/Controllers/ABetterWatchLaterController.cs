@@ -21,16 +21,22 @@ namespace ABetterWatchLaterAPI.Controllers
         }
 
         [HttpGet]
-        public string Get()
+        public List<YouTubeVideo> Get()
         {
-            YouTubeController ytc = new YouTubeController();
             DbManager dbManager = HttpContext.RequestServices.GetService(typeof(ABetterWatchLaterAPI.Models.DbManager)) as DbManager;
             
             List<YouTubeVideo> results = dbManager.GetAllVideos();
 
-            YouTubeVideo video = results[0];
-            
-            return video.ToFakeJson();
+            return results;
+        }
+
+        [HttpGet("search")]
+        public IActionResult GetVideo(string videoId)
+        {
+            DbManager dbManager = HttpContext.RequestServices.GetService(typeof(ABetterWatchLaterAPI.Models.DbManager)) as DbManager;
+            YouTubeVideo video = dbManager.GetVideoById(videoId);
+
+            return Ok(video);
         }
 
         [HttpPost]

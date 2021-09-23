@@ -45,6 +45,36 @@ namespace ABetterWatchLaterAPI.Models
             return list;
         }
 
+        public YouTubeVideo GetVideoById(string videoId)
+        {
+            YouTubeVideo video = new YouTubeVideo();
+
+            using (MySqlConnection conn = GetConnection())
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM Video WHERE", conn);
+                cmd.CommandText =
+                    "SELECT * FROM Video WHERE VideoId = @videoId";
+
+                cmd.Parameters.Add(new MySqlParameter("videoId", videoId));
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        video.VideoId = reader["VideoId"].ToString();
+                        video.Title = reader["Title"].ToString();
+                        video.ChannelId = reader["ChannelId"].ToString();
+                        video.Duration = reader["Duration"].ToString();
+                        video.Tags = reader["Tags"].ToString().Split('.').ToList();
+                        video.Thumbnail = reader["Thumbnail"].ToString();
+                    }
+                }
+            }
+
+            return video;
+        }
+
         public void AddVideo(YouTubeVideo video)
         {
             using (MySqlConnection conn = GetConnection())
