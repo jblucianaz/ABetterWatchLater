@@ -26,7 +26,7 @@ namespace ABetterWatchLaterAPI.Models
             using (MySqlConnection conn = GetConnection())
             {
                 conn.Open();
-                MySqlCommand cmd = new MySqlCommand("SELECT * FROM Video WHERE id < 10", conn);
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM Video", conn);
 
                 using (var reader = cmd.ExecuteReader())
                 {
@@ -43,6 +43,34 @@ namespace ABetterWatchLaterAPI.Models
                 }
             }
             return list;
+        }
+
+        public void AddVideo(YouTubeVideo video)
+        {
+            using (MySqlConnection conn = GetConnection())
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("INSERT ITON () VALUES ()", conn);
+                cmd.CommandText =
+                    "INSERT INTO Video (VideoId, Title, Url, ChannelId, Duration, Tags, Thumbnail) VALUES (@videoId, @title, @url, @channelId, @duration, @tags, @thumbnail)";
+                
+                cmd.Parameters.Add(new MySqlParameter("videoId", video.VideoId));
+                cmd.Parameters.Add(new MySqlParameter("title", video.Title));
+                cmd.Parameters.Add(new MySqlParameter("url", video.Url));
+                cmd.Parameters.Add(new MySqlParameter("channelId", video.ChannelId));
+                cmd.Parameters.Add(new MySqlParameter("duration", video.Duration));
+                cmd.Parameters.Add(new MySqlParameter("tags", video.TagsAsString()));
+                cmd.Parameters.Add(new MySqlParameter("thumbnail", video.Thumbnail));
+
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+
+                    }
+                }
+            }
         }
     }
 }

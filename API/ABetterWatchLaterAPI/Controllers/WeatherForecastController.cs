@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Net.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using ABetterWatchLaterAPI.Models;
 
 namespace ABetterWatchLaterAPI.Controllers
 {
@@ -30,11 +31,16 @@ namespace ABetterWatchLaterAPI.Controllers
         public string Get()
         {
             YouTubeController ytc = new YouTubeController();
+            DbManager dbManager = HttpContext.RequestServices.GetService(typeof(ABetterWatchLaterAPI.Models.DbManager)) as DbManager;
+
             string jsonResult = Task<string>.Run( () => {
                 return ytc.GetVideoInfo("Ks-_Mh1QhMc");
             }).Result;
 
-            YouTubeVideo video = ytc.ConvertJsonToYoutubeVideo(jsonResult);
+            List<YouTubeVideo> results = dbManager.GetAllVideos();
+
+            YouTubeVideo video = results[0];
+            dbManager.AddVideo(ytc.ConvertJsonToYoutubeVideo(jsonResult));
 
             //return jsonResult;
             return video.ToFakeJson();
