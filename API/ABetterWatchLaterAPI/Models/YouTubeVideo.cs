@@ -6,8 +6,6 @@ namespace ABetterWatchLaterAPI
 {
     public class YouTubeVideo
     {
-        //public string Id { get; set; }
-
         public string VideoId { get; set; }
 
         public string Title { get; set; }
@@ -24,7 +22,6 @@ namespace ABetterWatchLaterAPI
 
         public YouTubeVideo(string videoId, string title, string channelId, string duration, List<string> tags, string thumbnail)
         {
-            //Id = id;
             VideoId = videoId;
             Title = title;
             ChannelId = channelId;

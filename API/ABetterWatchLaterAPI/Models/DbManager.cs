@@ -50,7 +50,7 @@ namespace ABetterWatchLaterAPI.Models
             using (MySqlConnection conn = GetConnection())
             {
                 conn.Open();
-                MySqlCommand cmd = new MySqlCommand("INSERT ITON () VALUES ()", conn);
+                MySqlCommand cmd = new MySqlCommand("INSERT INTO () VALUES ()", conn);
                 cmd.CommandText =
                     "INSERT INTO Video (VideoId, Title, Url, ChannelId, Duration, Tags, Thumbnail) VALUES (@videoId, @title, @url, @channelId, @duration, @tags, @thumbnail)";
                 
