@@ -49,13 +49,21 @@ namespace ABetterWatchLaterAPI
         {
             string strTags = string.Empty;
 
-            foreach (string tag in Tags)
+            if (Tags.Count > 0)
             {
-                if (tag != "") 
-                    strTags += $"{tag},";
-            }
+                foreach (string tag in Tags)
+                {
+                    if (tag != "")
+                        strTags += $"{tag},";
+                }
 
-            return strTags.Remove(strTags.Length-1);
+                return strTags.Remove(strTags.Length - 1);
+            }
+            else
+            {
+                return strTags;
+            }
+            
         }
     }
 }

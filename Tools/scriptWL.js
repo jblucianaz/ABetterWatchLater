@@ -46,4 +46,14 @@ for(i = 0; i < videoList.length; i++) {
 	idList.push(videoId);
 }
 
+idList.forEach(function(item) {
+    var data = item;
+
+    fetch("https://localhost:5001/abetterwatchlater/", {
+        method: "POST", 
+        body: date
+    }).then(res => {
+        console.log("Request complete! response:", res);
+    });
+})
 console.save(idList);

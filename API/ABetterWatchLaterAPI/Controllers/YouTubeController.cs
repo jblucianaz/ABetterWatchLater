@@ -59,9 +59,13 @@ namespace ABetterWatchLaterAPI.Controllers
                     {
                         title = snippetElement.GetProperty("title").ToString();
                         channelId = snippetElement.GetProperty("channelId").ToString();
-                        foreach (JsonElement tag in snippetElement.GetProperty("tags").EnumerateArray())
+
+                        if (snippetElement.TryGetProperty("tags", out JsonElement tagsElement))
                         {
-                            tags.Add(tag.GetString());
+                            foreach (JsonElement tag in tagsElement.EnumerateArray())
+                            {
+                                tags.Add(tag.GetString());
+                            }
                         }
                         thumbnail = snippetElement
                             .GetProperty("thumbnails")

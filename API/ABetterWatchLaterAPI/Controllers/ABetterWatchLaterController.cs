@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Net.Http;
@@ -40,17 +41,23 @@ namespace ABetterWatchLaterAPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddVideo(string videoId)
+        public IActionResult AddVideo([FromBody] string videoId)
         {
             YouTubeController ytc = new YouTubeController();
             DbManager dbManager = HttpContext.RequestServices.GetService(typeof(ABetterWatchLaterAPI.Models.DbManager)) as DbManager;
+            using (JsonDocument document = JsonDocument.Parse(videoId))
+            {
+                JsonElement root = document.RootElement;
+                foreach (JsonElement id in root.EnumerateArray())
+                {
+                    string jsonResult = Task<string>.Run(() => {
+                        return ytc.GetVideoInfo(id.ToString());
+                    }).Result;
 
-            string jsonResult = Task<string>.Run(() => {
-                return ytc.GetVideoInfo(videoId);
-            }).Result;
-
-            dbManager.AddVideo(ytc.ConvertJsonToYoutubeVideo(jsonResult));
-
+                    dbManager.AddVideo(ytc.ConvertJsonToYoutubeVideo(jsonResult));
+                }
+            }
+           
             return Ok();
         }
     }

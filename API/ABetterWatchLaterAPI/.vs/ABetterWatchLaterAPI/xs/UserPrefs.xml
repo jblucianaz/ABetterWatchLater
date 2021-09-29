@@ -1,14 +1,10 @@
 ﻿<Properties StartupConfiguration="{EE890FE9-7F09-463D-B1D3-D238B73FE82A}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Controllers/ABetterWatchLaterController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Models/YouTubeVideo.cs">
     <Files>
-      <File FileName="Controllers/YouTubeController.cs" Line="37" Column="1" />
-      <File FileName="Models/YouTubeVideo.cs" Line="24" Column="10" />
-      <File FileName="Models/DbManager.cs" Line="61" Column="84" />
-      <File FileName="Controllers/WeatherForecastController.cs" Line="34" Column="29" />
-      <File FileName="appsettings.json" Line="11" Column="98" />
-      <File FileName="appsettings.Development.json" Line="9" Column="95" />
-      <File FileName="Startup.cs" Line="49" Column="44" />
-      <File FileName="Properties/launchSettings.json" Line="23" Column="38" />
+      <File FileName="Controllers/YouTubeController.cs" Line="68" Column="30" />
+      <File FileName="Controllers/ABetterWatchLaterController.cs" />
+      <File FileName="Models/DbManager.cs" />
+      <File FileName="Models/YouTubeVideo.cs" Line="58" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -18,18 +14,15 @@
               <Node name="Dependencies" expanded="True">
                 <Node name="PackageDependencies" expanded="True" />
               </Node>
-              <Node name="Controllers" expanded="True">
-                <Node name="ABetterWatchLaterController.cs" selected="True" />
+              <Node name="Controllers" expanded="True" />
+              <Node name="Models" expanded="True">
+                <Node name="YouTubeVideo.cs" selected="True" />
               </Node>
-              <Node name="Models" expanded="True" />
               <Node name="Properties" expanded="True" />
               <Node name="appsettings.json" expanded="True" />
             </Node>
           </Node>
         </State>
-      </Pad>
-      <Pad Id="MonoDevelop.Debugger.WatchPad">
-        <State />
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
