@@ -60,5 +60,14 @@ namespace ABetterWatchLaterAPI.Controllers
            
             return Ok();
         }
+
+        [HttpDelete]
+        public IActionResult DeleteVideo(string videoId)
+        {
+            DbManager dbManager = HttpContext.RequestServices.GetService(typeof(ABetterWatchLaterAPI.Models.DbManager)) as DbManager;
+            dbManager.DeleteVideo(videoId);
+
+            return Ok();
+        }
     }
 }

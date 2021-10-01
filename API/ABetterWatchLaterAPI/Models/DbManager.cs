@@ -102,5 +102,26 @@ namespace ABetterWatchLaterAPI.Models
                 }
             }
         }
+
+        public void DeleteVideo(string videoId)
+        {
+            using (MySqlConnection conn = GetConnection())
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("DELETE FROM Video WHERE", conn);
+                cmd.CommandText =
+                    "DELETE FROM Video WHERE VideoId = @videoId";
+
+                cmd.Parameters.Add(new MySqlParameter("videoId", videoId));
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+
+                    }
+                }
+            }
+        }
     }
 }
