@@ -6,14 +6,14 @@ namespace ABetterWatchLaterAPI
     {
         public string ChannelId { get; set; }
 
-        public string Title { get; set; }
+        public string Name { get; set; }
 
         public string Thumbnail { get; set; }
 
-        public YouTubeChannel(string channelId, string title, string thumbnail)
+        public YouTubeChannel(string channelId, string name, string thumbnail)
         {
             ChannelId = channelId;
-            Title = title;
+            Name = name;
             Thumbnail = thumbnail;
         }
     }
