@@ -16,5 +16,9 @@ namespace ABetterWatchLaterAPI
             Name = name;
             Thumbnail = thumbnail;
         }
+
+        public YouTubeChannel()
+        {
+        }
     }
 }

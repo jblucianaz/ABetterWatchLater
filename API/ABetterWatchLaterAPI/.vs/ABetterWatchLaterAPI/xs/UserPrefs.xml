@@ -1,11 +1,10 @@
 ﻿<Properties StartupConfiguration="{EE890FE9-7F09-463D-B1D3-D238B73FE82A}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Models/YouTubeChannel.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Controllers/YouTubeController.cs">
     <Files>
-      <File FileName="Controllers/YouTubeController.cs" Line="68" Column="30" />
-      <File FileName="Controllers/ABetterWatchLaterController.cs" />
-      <File FileName="Models/DbManager.cs" Line="33" Column="42" />
-      <File FileName="Models/YouTubeVideo.cs" />
-      <File FileName="Models/YouTubeChannel.cs" Line="1" Column="1" />
+      <File FileName="Controllers/YouTubeController.cs" Line="28" Column="34" />
+      <File FileName="Controllers/ABetterWatchLaterController.cs" Line="80" Column="44" />
+      <File FileName="Models/DbManager.cs" Line="1" Column="1" />
+      <File FileName="Controllers/VideoController.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -15,10 +14,10 @@
               <Node name="Dependencies" expanded="True">
                 <Node name="PackageDependencies" expanded="True" />
               </Node>
-              <Node name="Controllers" expanded="True" />
-              <Node name="Models" expanded="True">
-                <Node name="YouTubeChannel.cs" selected="True" />
+              <Node name="Controllers" expanded="True">
+                <Node name="YouTubeController.cs" selected="True" />
               </Node>
+              <Node name="Models" expanded="True" />
               <Node name="Properties" expanded="True" />
               <Node name="appsettings.json" expanded="True" />
             </Node>

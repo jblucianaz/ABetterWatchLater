@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 
 namespace ABetterWatchLaterAPI.Controllers
 {
-    public class YouTubeController : ControllerBase
+    public class YouTubeController
     {   
         public string CreateGetURL(string queryType, string id)
         {
@@ -19,20 +19,33 @@ namespace ABetterWatchLaterAPI.Controllers
                 "&id=" + id;
         }
 
-        public async Task<string> GetVideoInfo(string videoId)
+        public async Task<string> CallYouTubeApi(string url)
         {
-            string url = CreateGetURL(Constants.YouTube.VIDEOS, videoId);
-            string videoInfo;
-
             using (var httpClient = new HttpClient())
             {
                 using (var response = await httpClient.GetAsync(url))
                 {
-                    string apiResponse = await response.Content.ReadAsStringAsync();
-                    videoInfo = apiResponse;
+                    return await response.Content.ReadAsStringAsync();
                 }
             }
-            return videoInfo;
+        }
+
+        public string GetVideoInfo(string videoId)
+        {
+            string url = CreateGetURL(Constants.YouTube.VIDEOS, videoId);
+
+            return Task<string>.Run(() => {
+                return CallYouTubeApi(url);
+            }).Result;
+        }
+
+        public string GetChannelInfo(string channelId)
+        {
+            string url = CreateGetURL(Constants.YouTube.CHANNELS, channelId);
+
+            return Task<string>.Run(() => {
+                return CallYouTubeApi(url);
+            }).Result;
         }
 
         public YouTubeVideo ConvertJsonToYoutubeVideo(string jsonString) 
@@ -82,6 +95,39 @@ namespace ABetterWatchLaterAPI.Controllers
             YouTubeVideo youtubeVideo = new YouTubeVideo(videoId, title, channelId, duration, tags, thumbnail);
             
             return youtubeVideo;
+        }
+
+        public YouTubeChannel ConvertJsonToYouTubeChannel(string jsonString)
+        {
+            string channelId = string.Empty;
+            string name = string.Empty;
+            string thumbnail = string.Empty;
+
+            using (JsonDocument document = JsonDocument.Parse(jsonString))
+            {
+                JsonElement root = document.RootElement;
+                JsonElement itemElements = root.GetProperty("items");
+
+                foreach (JsonElement item in itemElements.EnumerateArray())
+                {
+                    if (item.TryGetProperty("id", out JsonElement idElement))
+                    {
+                        channelId = idElement.ToString();
+                    }
+                    if (item.TryGetProperty("snippet", out JsonElement snippetElement))
+                    {
+                        name = snippetElement.GetProperty("title").ToString();
+                        thumbnail = snippetElement
+                            .GetProperty("thumbnails")
+                            .GetProperty("medium")
+                            .GetProperty("url").ToString();
+                    }
+                }
+
+                YouTubeChannel youTubeChannel = new YouTubeChannel(channelId, name, thumbnail);
+
+                return youTubeChannel;
+            }
         }
     }
 }

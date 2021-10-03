@@ -19,6 +19,7 @@ namespace ABetterWatchLaterAPI.Models
             return new MySqlConnection(ConnectionString);
         }
 
+        #region Videos
         public List<YouTubeVideo> GetAllVideos()
         {
             List<YouTubeVideo> list = new List<YouTubeVideo>();
@@ -123,5 +124,128 @@ namespace ABetterWatchLaterAPI.Models
                 }
             }
         }
+        #endregion
+
+        #region Channels
+        public List<YouTubeChannel> GetAllChannels()
+        {
+            List<YouTubeChannel> list = new List<YouTubeChannel>();
+
+            using (MySqlConnection conn = GetConnection())
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM Channel", conn);
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        list.Add(new YouTubeChannel(
+                            reader["ChannelId"].ToString(),
+                            reader["Name"].ToString(),
+                            reader["Thumbnail"].ToString()));
+                    }
+                }
+            }
+            return list;
+        }
+
+        public YouTubeChannel GetChannelById(string channelId)
+        {
+            YouTubeChannel channel = new YouTubeChannel();
+
+            using (MySqlConnection conn = GetConnection())
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM Channel WHERE", conn);
+                cmd.CommandText =
+                    "SELECT * FROM Channel WHERE ChannelId = @channelId";
+
+                cmd.Parameters.Add(new MySqlParameter("channelId", channelId));
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        channel.ChannelId = reader["ChannelId"].ToString();
+                        channel.Name = reader["Name"].ToString();
+                        channel.Thumbnail = reader["Thumbnail"].ToString();
+                    }
+                }
+            }
+
+            return channel;
+        }
+
+        public void AddChannel(YouTubeChannel channel)
+        {
+            using (MySqlConnection conn = GetConnection())
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("INSERT INTO () VALUES ()", conn);
+                cmd.CommandText =
+                    "INSERT INTO Channel (ChannelId, Name, Thumbnail) VALUES (@channelId, @name, @thumbnail)";
+
+                cmd.Parameters.Add(new MySqlParameter("channelId", channel.ChannelId));
+                cmd.Parameters.Add(new MySqlParameter("name", channel.Name));
+                cmd.Parameters.Add(new MySqlParameter("thumbnail", channel.Thumbnail));
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+
+                    }
+                }
+            }
+        }
+
+        public void DeleteChannel(string channelId)
+        {
+            using (MySqlConnection conn = GetConnection())
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("DELETE FROM Channel WHERE", conn);
+                cmd.CommandText =
+                    "DELETE FROM Channel WHERE ChannelId = @channelId";
+
+                cmd.Parameters.Add(new MySqlParameter("channelId", channelId));
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+
+                    }
+                }
+            }
+        }
+
+        public bool IsChannelInDatabase(string channelId)
+        {
+            using (MySqlConnection conn = GetConnection())
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM Channel WHERE", conn);
+                cmd.CommandText =
+                    "SELECT COUNT(*) FROM Channel WHERE ChannelId = @channelId";
+
+                cmd.Parameters.Add(new MySqlParameter("channelId", channelId));
+
+                object result = cmd.ExecuteScalar();
+
+                if (result != null)
+                {
+                    int entries = Convert.ToInt32(result);
+
+                    return (entries > 0);
+                }
+                else
+                {
+                    throw new Exception("Error");
+                }
+            }
+        }
+        #endregion
     }
 }
