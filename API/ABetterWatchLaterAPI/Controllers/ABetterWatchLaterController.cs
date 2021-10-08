@@ -7,6 +7,7 @@ using System.Net.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ABetterWatchLaterAPI.Models;
+using ABetterWatchLaterAPI.Managers;
 
 namespace ABetterWatchLaterAPI.Controllers
 {
@@ -23,65 +24,71 @@ namespace ABetterWatchLaterAPI.Controllers
 
         private DbManager GetServiceForDbManager()
         {
-            return HttpContext.RequestServices.GetService(typeof(ABetterWatchLaterAPI.Models.DbManager)) as DbManager;
+            return HttpContext.RequestServices.GetService(typeof(DbManager)) as DbManager;
         }
 
         [HttpGet]
         public List<YouTubeVideo> Get()
         {
             DbManager dbManager = GetServiceForDbManager();
-
-            List<YouTubeVideo> results = dbManager.GetAllVideos();
-
-            return results;
+            return dbManager.GetAllVideos();
+                
         }
 
         [HttpGet("search")]
         public IActionResult GetVideo(string videoId)
         {
             DbManager dbManager = GetServiceForDbManager();
-
             YouTubeVideo video = dbManager.GetVideoById(videoId);
 
-            return Ok(video);
+            if(video == null)
+            {
+                return NoContent();
+            }
+
+            return Ok(video);      
         }
 
         [HttpPost]
-        public IActionResult AddVideo([FromBody] string videoId)
+        public IActionResult AddVideo([FromBody] string videoIds)
         {
             YouTubeController ytc = new YouTubeController();
             DbManager dbManager = GetServiceForDbManager();
 
-            using (JsonDocument document = JsonDocument.Parse(videoId))
+            try
             {
-                JsonElement root = document.RootElement;
-                foreach (JsonElement id in root.EnumerateArray())
+                using (JsonDocument document = JsonDocument.Parse(videoIds))
                 {
-                    string jsonResult = ytc.GetVideoInfo(id.ToString());
-
-                    YouTubeVideo video = ytc.ConvertJsonToYoutubeVideo(jsonResult);
-                    dbManager.AddVideo(video);
-
-                    if (!dbManager.IsChannelInDatabase(video.ChannelId))
+                    JsonElement root = document.RootElement;
+                    foreach (JsonElement id in root.EnumerateArray())
                     {
-                        string jsonResult2 = ytc.GetChannelInfo(video.ChannelId);
-                        dbManager.AddChannel(ytc.ConvertJsonToYouTubeChannel(jsonResult2));
+                        YouTubeVideo video = ytc.GetVideo(id.ToString());
+                        dbManager.AddVideo(video);
+
+                        if (!dbManager.IsChannelInDatabase(video.ChannelId))
+                        {
+                            YouTubeChannel channel = ytc.GetChannel(video.ChannelId);
+                            dbManager.AddChannel(channel);
+                        }
                     }
                 }
+
+                return Ok();
             }
-           
-            return Ok();
+            catch(Exception ex)
+            {
+                return Problem(ex.Message);
+            }
         }
 
         [HttpDelete]
         public IActionResult DeleteVideo(string videoId)
         {
-            YouTubeController ytc = new YouTubeController();
             DbManager dbManager = GetServiceForDbManager();
             dbManager.DeleteVideo(videoId);
 
-            string jsonResult = ytc.GetVideoInfo(videoId);
-            YouTubeVideo video = ytc.ConvertJsonToYoutubeVideo(jsonResult);
+            YouTubeController ytc = new YouTubeController();
+            YouTubeVideo video = ytc.GetVideo(videoId);
 
             if (dbManager.IsChannelInDatabase(video.ChannelId))  // TODO: Need to check if there is more video with this channel ID before deleting it completely.
             {

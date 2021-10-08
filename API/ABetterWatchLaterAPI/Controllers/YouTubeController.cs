@@ -3,15 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Net.Http;
-using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using ABetterWatchLaterAPI.Managers;
+using ABetterWatchLaterAPI.Models;
 
 namespace ABetterWatchLaterAPI.Controllers
 {
     public class YouTubeController
     {   
-        public string CreateGetURL(string queryType, string id)
+        /// <summary>
+        /// Create the URL to fetch data from the YouTube API.
+        /// </summary>
+        /// <param name="queryType">The kind of object we get info about: video or channel.</param>
+        /// <param name="id">The ID of the video or channel.</param>
+        /// <returns>A complete and valid YouTube API URL.</returns>
+        private string CreateGetURL(string queryType, string id)
         {
             return Constants.YouTube.BASE_API_URL + queryType + "?part=snippet" + 
                 (queryType == Constants.YouTube.VIDEOS ? "&part=contentDetails" : "") + 
@@ -19,7 +26,12 @@ namespace ABetterWatchLaterAPI.Controllers
                 "&id=" + id;
         }
 
-        public async Task<string> CallYouTubeApi(string url)
+        /// <summary>
+        /// Fetch data from the YouTube API.
+        /// </summary>
+        /// <param name="url">The URL to the YouTube API.</param>
+        /// <returns>A A task to get all datas about the requested object.</returns>
+        private async Task<string> CallYouTubeApi(string url)
         {
             using (var httpClient = new HttpClient())
             {
@@ -30,104 +42,56 @@ namespace ABetterWatchLaterAPI.Controllers
             }
         }
 
-        public string GetVideoInfo(string videoId)
+        /// <summary>
+        /// Run the task fetching data from the YouTube API.
+        /// </summary>
+        /// <param name="url">The URL to the YouTube API.</param>
+        /// <returns>A Json string with all datas about the requested object.</returns>
+        private string RunCallYouTubeApiTask(string url)
         {
-            string url = CreateGetURL(Constants.YouTube.VIDEOS, videoId);
-
-            return Task<string>.Run(() => {
+            return Task.Run(() => {
                 return CallYouTubeApi(url);
             }).Result;
         }
 
-        public string GetChannelInfo(string channelId)
+        /// <summary>
+        /// Get video data from an ID. 
+        /// </summary>
+        /// <param name="videoId">The ID of the video.</param>
+        /// <returns>Video data as Json.</returns>
+        private string GetVideoInfo(string videoId)
         {
-            string url = CreateGetURL(Constants.YouTube.CHANNELS, channelId);
-
-            return Task<string>.Run(() => {
-                return CallYouTubeApi(url);
-            }).Result;
+            return RunCallYouTubeApiTask(CreateGetURL(Constants.YouTube.VIDEOS, videoId));
         }
 
-        public YouTubeVideo ConvertJsonToYoutubeVideo(string jsonString) 
+        /// <summary>
+        /// Get channel data from an ID. 
+        /// </summary>
+        /// <param name="channelId">The ID of the video.</param>
+        /// <returns>Channel data as Json.</returns>
+        private string GetChannelInfo(string channelId)
         {
-            string videoId = string.Empty;
-            string title = string.Empty;
-            string channelId = string.Empty;
-            string duration = string.Empty;
-            List<string> tags = new List<string>();
-            string thumbnail = string.Empty;
-            
-            using (JsonDocument document = JsonDocument.Parse(jsonString))
-            {
-                JsonElement root = document.RootElement;
-                JsonElement itemElements = root.GetProperty("items");
-
-                foreach (JsonElement item in itemElements.EnumerateArray())
-                {
-                    if (item.TryGetProperty("id", out JsonElement idElement))
-                    {
-                        videoId = idElement.ToString();
-                    }
-                    if (item.TryGetProperty("snippet", out JsonElement snippetElement))
-                    {
-                        title = snippetElement.GetProperty("title").ToString();
-                        channelId = snippetElement.GetProperty("channelId").ToString();
-
-                        if (snippetElement.TryGetProperty("tags", out JsonElement tagsElement))
-                        {
-                            foreach (JsonElement tag in tagsElement.EnumerateArray())
-                            {
-                                tags.Add(tag.GetString());
-                            }
-                        }
-                        thumbnail = snippetElement
-                            .GetProperty("thumbnails")
-                            .GetProperty("standard")
-                            .GetProperty("url").ToString();
-                    }
-                    if (item.TryGetProperty("contentDetails", out JsonElement contentDetailsElement))
-                    {
-                        duration = contentDetailsElement.GetProperty("duration").ToString();
-                    }
-                }
-            }
-            
-            YouTubeVideo youtubeVideo = new YouTubeVideo(videoId, title, channelId, duration, tags, thumbnail);
-            
-            return youtubeVideo;
+            return RunCallYouTubeApiTask(CreateGetURL(Constants.YouTube.CHANNELS, channelId));
         }
 
-        public YouTubeChannel ConvertJsonToYouTubeChannel(string jsonString)
+        /// <summary>
+        /// Get video object from an ID. 
+        /// </summary>
+        /// <param name="channelId">The ID of the video.</param>
+        /// <returns>YouTube video as an object.</returns>
+        public YouTubeVideo GetVideo(string videoId)
         {
-            string channelId = string.Empty;
-            string name = string.Empty;
-            string thumbnail = string.Empty;
+            return new JsonManager().ConvertJsonToYoutubeVideo(GetVideoInfo(videoId));
+        }
 
-            using (JsonDocument document = JsonDocument.Parse(jsonString))
-            {
-                JsonElement root = document.RootElement;
-                JsonElement itemElements = root.GetProperty("items");
-
-                foreach (JsonElement item in itemElements.EnumerateArray())
-                {
-                    if (item.TryGetProperty("id", out JsonElement idElement))
-                    {
-                        channelId = idElement.ToString();
-                    }
-                    if (item.TryGetProperty("snippet", out JsonElement snippetElement))
-                    {
-                        name = snippetElement.GetProperty("title").ToString();
-                        thumbnail = snippetElement
-                            .GetProperty("thumbnails")
-                            .GetProperty("medium")
-                            .GetProperty("url").ToString();
-                    }
-                }
-
-                YouTubeChannel youTubeChannel = new YouTubeChannel(channelId, name, thumbnail);
-
-                return youTubeChannel;
-            }
+        /// <summary>
+        /// Get channel object from an ID. 
+        /// </summary>
+        /// <param name="channelId">The ID of the channel.</param>
+        /// <returns>YouTube channel data as an object.</returns>
+        public YouTubeChannel GetChannel(string channelId)
+        {
+            return new JsonManager().ConvertJsonToYouTubeChannel(GetChannelInfo(channelId));
         }
     }
 }

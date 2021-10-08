@@ -7,8 +7,12 @@
 
   <ItemGroup>
     <None Remove="MySql.Data" />
+    <None Remove="Managers\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MySql.Data" Version="8.0.26" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Managers\" />
   </ItemGroup>
 </Project>

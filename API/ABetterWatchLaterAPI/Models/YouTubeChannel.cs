@@ -1,6 +1,6 @@
 using System;
 
-namespace ABetterWatchLaterAPI
+namespace ABetterWatchLaterAPI.Models
 {
     public class YouTubeChannel
     {
