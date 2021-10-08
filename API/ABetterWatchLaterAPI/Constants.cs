@@ -8,4 +8,33 @@ public static class Constants
         public const string CHANNELS = "channels";
         public const string VIDEOS = "videos";    
     }
+
+    public static class ThumbnailSize
+    {
+        // Video:120x90 Channel:88x88
+        public const string DEFAULT = "default";
+        // Video:320x180 Channel:240x240
+        public const string MEDIUM = "medium";
+        // Video:480x360 Channel:800x800
+        public const string HIGH = "high";
+        // Video:640x480
+        public const string STANDARD = "standard";
+        // Video:1280x720
+        public const string MAXRES = "maxres";
+    }
+
+    public static class PropertiesName
+    {
+        public const string CHANNEL_ID = "channelId";
+        public const string CONTENT_DETAILS = "contentDetails";
+        public const string DURATION = "duration";
+        public const string ID = "id";
+        public const string ITEMS = "items";
+        public const string SNIPPET = "snippet";
+        public const string TAGS = "tags";
+        public const string THUMBNAILS = "thumbnails";
+        public const string TITLE = "title";
+        public const string URL = "url";
+         
+    }
 }

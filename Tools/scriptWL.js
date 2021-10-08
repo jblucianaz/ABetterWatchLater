@@ -51,7 +51,7 @@ idList.forEach(function(item) {
 
     fetch("https://localhost:5001/abetterwatchlater/", {
         method: "POST", 
-        body: date
+        body: data
     }).then(res => {
         console.log("Request complete! response:", res);
     });

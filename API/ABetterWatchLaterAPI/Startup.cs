@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using ABetterWatchLaterAPI.Models;
+using ABetterWatchLaterAPI.Managers;
 
 namespace ABetterWatchLaterAPI
 {

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ABetterWatchLaterAPI
+namespace ABetterWatchLaterAPI.Models
 {
     public class YouTubeVideo
     {

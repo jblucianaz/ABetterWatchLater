@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using MySql.Data.MySqlClient;
+using ABetterWatchLaterAPI.Models;
 
-namespace ABetterWatchLaterAPI.Models
+namespace ABetterWatchLaterAPI.Managers
 {
     public class DbManager
     {
