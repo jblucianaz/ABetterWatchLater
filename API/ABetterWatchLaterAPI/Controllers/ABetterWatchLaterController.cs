@@ -22,24 +22,27 @@ namespace ABetterWatchLaterAPI.Controllers
             _logger = logger;
         }
 
-        private DbManager GetServiceForDbManager()
+        private DbManager _dbManager
         {
-            return HttpContext.RequestServices.GetService(typeof(DbManager)) as DbManager;
+            get
+            { 
+                return HttpContext.RequestServices.GetService(typeof(DbManager)) as DbManager;
+            }
         }
 
+        #region Routes
+
+        #region HttpGet
         [HttpGet]
         public List<YouTubeVideo> Get()
         {
-            DbManager dbManager = GetServiceForDbManager();
-            return dbManager.GetAllVideos();
-                
+            return new VideoController().GetAllVideos(_dbManager);               
         }
-
+        
         [HttpGet("search")]
         public IActionResult GetVideo(string videoId)
         {
-            DbManager dbManager = GetServiceForDbManager();
-            YouTubeVideo video = dbManager.GetVideoById(videoId);
+            YouTubeVideo video = new VideoController().GetVideoById(_dbManager, videoId);
 
             if(video == null)
             {
@@ -48,29 +51,17 @@ namespace ABetterWatchLaterAPI.Controllers
 
             return Ok(video);      
         }
+        #endregion
 
+        #region HttpPost
         [HttpPost]
         public IActionResult AddVideo([FromBody] string videoIds)
         {
-            YouTubeController ytc = new YouTubeController();
-            DbManager dbManager = GetServiceForDbManager();
-
             try
             {
                 using (JsonDocument document = JsonDocument.Parse(videoIds))
                 {
-                    JsonElement root = document.RootElement;
-                    foreach (JsonElement id in root.EnumerateArray())
-                    {
-                        YouTubeVideo video = ytc.GetVideo(id.ToString());
-                        dbManager.AddVideo(video);
-
-                        if (!dbManager.IsChannelInDatabase(video.ChannelId))
-                        {
-                            YouTubeChannel channel = ytc.GetChannel(video.ChannelId);
-                            dbManager.AddChannel(channel);
-                        }
-                    }
+                    new VideoController().AddVideos(_dbManager, document);
                 }
 
                 return Ok();
@@ -80,22 +71,24 @@ namespace ABetterWatchLaterAPI.Controllers
                 return Problem(ex.Message);
             }
         }
+        #endregion
 
+        #region HttpDelete
         [HttpDelete]
         public IActionResult DeleteVideo(string videoId)
         {
-            DbManager dbManager = GetServiceForDbManager();
-            dbManager.DeleteVideo(videoId);
-
-            YouTubeController ytc = new YouTubeController();
-            YouTubeVideo video = ytc.GetVideo(videoId);
-
-            if (dbManager.IsChannelInDatabase(video.ChannelId))  // TODO: Need to check if there is more video with this channel ID before deleting it completely.
+            try
             {
-                dbManager.DeleteChannel(video.ChannelId);
+                new VideoController().DeleteVideo(_dbManager, videoId);
+                return Ok();
             }
-
-            return Ok();
+            catch(Exception ex)
+            {
+                return Problem(ex.Message);
+            }
         }
+        #endregion
+
+        #endregion
     }
 }

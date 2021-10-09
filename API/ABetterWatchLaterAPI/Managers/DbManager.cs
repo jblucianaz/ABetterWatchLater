@@ -74,6 +74,11 @@ namespace ABetterWatchLaterAPI.Managers
                 }
             }
 
+            if(!video.isValid())
+            {
+                return null;
+            }
+
             return video;
         }
 
@@ -240,6 +245,30 @@ namespace ABetterWatchLaterAPI.Managers
                     int entries = Convert.ToInt32(result);
 
                     return (entries > 0);
+                }
+                else
+                {
+                    throw new Exception("Error");
+                }
+            }
+        }
+
+        public int CountVideosFromChannel(string channelId)
+        {
+            using (MySqlConnection conn = GetConnection())
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM Channel WHERE", conn);
+                cmd.CommandText =
+                    "SELECT COUNT(*) FROM Video WHERE ChannelId = @channelId";
+
+                cmd.Parameters.Add(new MySqlParameter("channelId", channelId));
+
+                object result = cmd.ExecuteScalar();
+
+                if (result != null)
+                {
+                    return Convert.ToInt32(result);
                 }
                 else
                 {

@@ -65,5 +65,10 @@ namespace ABetterWatchLaterAPI.Models
             }
             
         }
+
+        public bool isValid()
+        {
+            return (!string.IsNullOrEmpty(VideoId));
+        }
     }
 }
