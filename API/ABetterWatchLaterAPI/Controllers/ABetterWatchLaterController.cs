@@ -55,16 +55,12 @@ namespace ABetterWatchLaterAPI.Controllers
 
         #region HttpPost
         [HttpPost]
-        public IActionResult AddVideo([FromBody] string videoIds)
+        public IActionResult AddVideo([FromBody] string[] videoIds)
         {
             try
             {
-                using (JsonDocument document = JsonDocument.Parse(videoIds))
-                {
-                    new VideoController().AddVideos(_dbManager, document);
-                }
-
-                return Ok();
+                new VideoController().AddVideos(_dbManager, videoIds);
+                return Ok($"{videoIds.Count()} elements added to database.");
             }
             catch(Exception ex)
             {

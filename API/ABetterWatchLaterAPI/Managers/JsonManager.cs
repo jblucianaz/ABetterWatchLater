@@ -70,6 +70,11 @@ namespace ABetterWatchLaterAPI.Managers
         /// <returns>The link to the thumbnail.</returns>
         public string GetThumbnail(JsonElement element, string size)
         {
+            if (!isSizeAvailable(element, size))
+            {
+                size = Constants.ThumbnailSize.DEFAULT;
+            }
+
             return element
                 .GetProperty(Constants.PropertiesName.THUMBNAILS)
                 .GetProperty(size)
@@ -145,5 +150,18 @@ namespace ABetterWatchLaterAPI.Managers
             return youTubeChannel;
         }
         #endregion
+
+        private bool isSizeAvailable(JsonElement element, string size)
+        {
+            foreach (JsonProperty sizeElement in element.GetProperty(Constants.PropertiesName.THUMBNAILS).EnumerateObject())
+            {
+                if (sizeElement.Name == size)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
     }
 }

@@ -27,6 +27,17 @@ namespace ABetterWatchLaterAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: "AllOrigins",
+                              builder =>
+                              {
+                                  builder.AllowAnyHeader();
+                                  builder.AllowAnyOrigin();
+                                  builder.AllowAnyMethod();
+                              });
+            });
+
             services.AddControllers();
             services.Add(new ServiceDescriptor(typeof(DbManager), new DbManager(Configuration.GetConnectionString("DefaultConnection"))));
         }
@@ -42,6 +53,8 @@ namespace ABetterWatchLaterAPI
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors("AllOrigins");
 
             app.UseAuthorization();
 

@@ -1,10 +1,13 @@
 ﻿<Properties StartupConfiguration="{EE890FE9-7F09-463D-B1D3-D238B73FE82A}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Managers/DbManager.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Constants.cs">
     <Files>
-      <File FileName="Controllers/YouTubeController.cs" Line="63" Column="10" />
-      <File FileName="Controllers/VideoController.cs" Line="58" Column="1" />
-      <File FileName="Controllers/ABetterWatchLaterController.cs" Line="73" Column="27" />
-      <File FileName="Managers/DbManager.cs" Line="1" Column="1" />
+      <File FileName="Controllers/YouTubeController.cs" Line="84" Column="1" />
+      <File FileName="Controllers/VideoController.cs" />
+      <File FileName="Controllers/ABetterWatchLaterController.cs" />
+      <File FileName="Managers/DbManager.cs" />
+      <File FileName="Startup.cs" />
+      <File FileName="Managers/JsonManager.cs" Line="77" Column="1" />
+      <File FileName="Constants.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -13,17 +16,11 @@
             <Node name="ABetterWatchLaterAPI" expanded="True">
               <Node name="Dependencies" expanded="True" />
               <Node name="Controllers" expanded="True" />
-              <Node name="Managers" expanded="True">
-                <Node name="DbManager.cs" selected="True" />
-              </Node>
+              <Node name="Managers" expanded="True" />
               <Node name="Models" expanded="True" />
+              <Node name="Constants.cs" selected="True" />
             </Node>
           </Node>
-        </State>
-      </Pad>
-      <Pad Id="MonoDevelop.Debugger.WatchPad">
-        <State>
-          <Value>jsonElement.ToString()</Value>
         </State>
       </Pad>
     </Pads>
@@ -31,7 +28,9 @@
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Users/jb/Projets/Dev/ABetterWatchLater/API/ABetterWatchLaterAPI/Controllers/VideoController.cs" relfile="Controllers/VideoController.cs" line="50" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.ItemProperties.ABetterWatchLaterAPI PreferredExecutionTarget="/Applications/Safari.app" />

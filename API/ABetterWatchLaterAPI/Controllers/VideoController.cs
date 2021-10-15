@@ -37,19 +37,17 @@ namespace ABetterWatchLaterAPI.Controllers
             }
         }
 
-        public void AddVideos(DbManager dbManager, JsonDocument document)
+        public void AddVideos(DbManager dbManager, string[] videoIds)
         {
-            JsonElement root = document.RootElement;
-
-            if (root.GetArrayLength() == 1)
+            if (videoIds.Count() == 1)
             {
-                AddVideo(dbManager, root[0].ToString());
+                AddVideo(dbManager, videoIds[0]);
                 return;
             }
 
-            foreach (JsonElement id in root.EnumerateArray())
+            foreach (string id in videoIds)
             {
-                AddVideo(dbManager, id.ToString());
+                AddVideo(dbManager, id);
             }
         }
 
