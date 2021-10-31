@@ -14,11 +14,10 @@ class App extends Component {
     }
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     fetch('https://localhost:5001/abetterwatchlater')
-    .then((response) => {
-      console.log(response)
-    })
+      .then((response) => response.json())
+      .then((data) => this.setState({videoList: data})) 
   }
 
   render() {
@@ -26,9 +25,13 @@ class App extends Component {
       <div className="App">
         <SearchBar/>
         <ChannelContainer/>
-        <VideoContainer/>
+        <VideoContainer videoList={this.state.videoList}/>
       </div>
     );
+  }
+
+  populateLists() {
+    // TODO: fetch videos AND channels data to update the state only once. 
   }
 }
 
