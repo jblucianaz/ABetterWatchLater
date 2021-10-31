@@ -33,12 +33,18 @@ namespace ABetterWatchLaterAPI.Controllers
         #region Routes
 
         #region HttpGet
-        [HttpGet]
-        public List<YouTubeVideo> Get()
+        [HttpGet("videos")]
+        public List<YouTubeVideo> GetAllVideos()
         {
-            return new VideoController().GetAllVideos(_dbManager);               
+            return new VideoController().GetAllVideos(_dbManager);
         }
-        
+
+        [HttpGet("channels")]
+        public List<YouTubeChannel> GetAllChannels()
+        {
+            return new ChannelController().GetAllChannels(_dbManager);
+        }
+
         [HttpGet("search")]
         public IActionResult GetVideo(string videoId)
         {

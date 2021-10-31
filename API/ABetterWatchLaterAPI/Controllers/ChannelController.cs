@@ -1,10 +1,15 @@
-﻿using System;
+﻿using ABetterWatchLaterAPI.Models;
+using ABetterWatchLaterAPI.Managers;
+using System;
+using System.Collections.Generic;
+
 namespace ABetterWatchLaterAPI.Controllers
 {
     public class ChannelController
     {
-        public ChannelController()
+        public List<YouTubeChannel> GetAllChannels(DbManager dbManager)
         {
+            return dbManager.GetAllChannels();
         }
     }
 }
