@@ -34,7 +34,7 @@ namespace ABetterWatchLaterAPI.Models
         {
         }
 
-        public string ToFakeJson()
+        /*public string ToFakeJson()
         {
             return @$"
             VideoId: {VideoId},
@@ -43,7 +43,7 @@ namespace ABetterWatchLaterAPI.Models
             Duration: {Duration},
             Tags: {TagsAsString()},
             Thumbnail: {Thumbnail}";
-        }
+        }*/
 
         public string TagsAsString()
         {

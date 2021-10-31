@@ -1,13 +1,16 @@
 ﻿<Properties StartupConfiguration="{EE890FE9-7F09-463D-B1D3-D238B73FE82A}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Constants.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Models/YouTubeVideo.cs">
     <Files>
-      <File FileName="Controllers/YouTubeController.cs" Line="84" Column="1" />
+      <File FileName="Controllers/YouTubeController.cs" Line="79" Column="23" />
       <File FileName="Controllers/VideoController.cs" />
       <File FileName="Controllers/ABetterWatchLaterController.cs" />
       <File FileName="Managers/DbManager.cs" />
       <File FileName="Startup.cs" />
-      <File FileName="Managers/JsonManager.cs" Line="77" Column="1" />
-      <File FileName="Constants.cs" Line="1" Column="1" />
+      <File FileName="Managers/JsonManager.cs" />
+      <File FileName="Constants.cs" />
+      <File FileName="Models/YouTubeVideo.cs" Line="42" Column="36" />
+      <File FileName="Controllers/ChannelController.cs" />
+      <File FileName="Models/YouTubeChannel.cs" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -17,8 +20,9 @@
               <Node name="Dependencies" expanded="True" />
               <Node name="Controllers" expanded="True" />
               <Node name="Managers" expanded="True" />
-              <Node name="Models" expanded="True" />
-              <Node name="Constants.cs" selected="True" />
+              <Node name="Models" expanded="True">
+                <Node name="YouTubeVideo.cs" selected="True" />
+              </Node>
             </Node>
           </Node>
         </State>
@@ -28,9 +32,7 @@
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <Breakpoint file="/Users/jb/Projets/Dev/ABetterWatchLater/API/ABetterWatchLaterAPI/Controllers/VideoController.cs" relfile="Controllers/VideoController.cs" line="50" column="1" />
-    </BreakpointStore>
+    <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.ItemProperties.ABetterWatchLaterAPI PreferredExecutionTarget="/Applications/Safari.app" />
