@@ -15,23 +15,35 @@ class App extends Component {
   }
 
   UNSAFE_componentWillMount() {
-    fetch('https://localhost:5001/abetterwatchlater')
-      .then((response) => response.json())
-      .then((data) => this.setState({videoList: data})) 
+    this.initData()
   }
 
   render() {
+    console.log(this.state)
     return (
       <div className="App">
         <SearchBar/>
-        <ChannelContainer/>
+        <ChannelContainer channelList={this.state.channelList}/>
         <VideoContainer videoList={this.state.videoList}/>
       </div>
     );
   }
 
-  populateLists() {
-    // TODO: fetch videos AND channels data to update the state only once. 
+  initData() {
+    this.getAllVideos()
+    this.getAllChannels()
+  }
+
+  getAllChannels() {
+    fetch('https://localhost:5001/abetterwatchlater/channels')
+      .then((response) => response.json())
+      .then((data) => this.setState({channelList: data}))
+    }
+
+  getAllVideos() {
+    return fetch('https://localhost:5001/abetterwatchlater/videos')
+      .then((response) => response.json())
+      .then((data) => this.setState({videoList: data}))
   }
 }
 
