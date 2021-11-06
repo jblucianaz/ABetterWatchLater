@@ -1,4 +1,4 @@
-import './VideoItem.css'
+import '../Style/VideoItem.css'
 
 function VideoItem(props) {
     return (

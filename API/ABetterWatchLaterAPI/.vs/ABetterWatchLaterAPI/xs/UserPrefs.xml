@@ -1,14 +1,14 @@
 ﻿<Properties StartupConfiguration="{EE890FE9-7F09-463D-B1D3-D238B73FE82A}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Models/YouTubeVideo.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Controllers/ABetterWatchLaterController.cs">
     <Files>
       <File FileName="Controllers/YouTubeController.cs" Line="79" Column="23" />
       <File FileName="Controllers/VideoController.cs" />
-      <File FileName="Controllers/ABetterWatchLaterController.cs" />
+      <File FileName="Controllers/ABetterWatchLaterController.cs" Line="48" Column="28" />
       <File FileName="Managers/DbManager.cs" />
       <File FileName="Startup.cs" />
       <File FileName="Managers/JsonManager.cs" />
       <File FileName="Constants.cs" />
-      <File FileName="Models/YouTubeVideo.cs" Line="42" Column="36" />
+      <File FileName="Models/YouTubeVideo.cs" />
       <File FileName="Controllers/ChannelController.cs" />
       <File FileName="Models/YouTubeChannel.cs" />
     </Files>
@@ -18,11 +18,11 @@
           <Node name="ABetterWatchLaterAPI" expanded="True">
             <Node name="ABetterWatchLaterAPI" expanded="True">
               <Node name="Dependencies" expanded="True" />
-              <Node name="Controllers" expanded="True" />
-              <Node name="Managers" expanded="True" />
-              <Node name="Models" expanded="True">
-                <Node name="YouTubeVideo.cs" selected="True" />
+              <Node name="Controllers" expanded="True">
+                <Node name="ABetterWatchLaterController.cs" selected="True" />
               </Node>
+              <Node name="Managers" expanded="True" />
+              <Node name="Models" expanded="True" />
             </Node>
           </Node>
         </State>

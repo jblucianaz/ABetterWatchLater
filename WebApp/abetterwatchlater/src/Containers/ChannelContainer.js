@@ -1,14 +1,11 @@
 import ChannelItem from '../Components/ChannelItem';
+import '../Style/ChannelContainer.css'
 
 function ChannelContainer({channelList}) {
-    const style = 
-    {
-        display:"inline-block",
-        listStyleType: "none"
-    }
+
     
     return (
-        <ul style={style}>
+        <ul>
             {
                 channelList.map(channel => {
                     return <ChannelItem key={channel.channelId} channel={{...channel}} />

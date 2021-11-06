@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import './App.css';
+import '../Style/App.css';
 import '../Components/VideoItem';
 import VideoContainer from './VideoContainer'
 import SearchBar from '../Components/SearchBar'
@@ -41,7 +41,7 @@ class App extends Component {
     }
 
   getAllVideos() {
-    return fetch('https://localhost:5001/abetterwatchlater/videos')
+    fetch('https://localhost:5001/abetterwatchlater/videos')
       .then((response) => response.json())
       .then((data) => this.setState({videoList: data}))
   }
