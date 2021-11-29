@@ -82,6 +82,34 @@ namespace ABetterWatchLaterAPI.Managers
             return video;
         }
 
+        public List<YouTubeVideo> SearchVideosByName(string name)
+        {
+            List<YouTubeVideo> list = new List<YouTubeVideo>();
+
+            using (MySqlConnection conn = GetConnection())
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM Video WHERE Title LIKE '%%'", conn);
+                cmd.CommandText = "SELECT * FROM Video WHERE Title LIKE @title";
+                cmd.Parameters.Add(new MySqlParameter("title", $"%{name}%"));
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        list.Add(new YouTubeVideo(
+                            reader["VideoId"].ToString(),
+                            reader["Title"].ToString(),
+                            reader["ChannelId"].ToString(),
+                            reader["Duration"].ToString(),
+                            reader["Tags"].ToString().Split('.').ToList(),
+                            reader["Thumbnail"].ToString()));
+                    }
+                }
+            }
+            return list;
+        }
+
         public void AddVideo(YouTubeVideo video)
         {
             using (MySqlConnection conn = GetConnection())

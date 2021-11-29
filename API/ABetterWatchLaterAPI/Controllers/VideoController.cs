@@ -23,6 +23,11 @@ namespace ABetterWatchLaterAPI.Controllers
              return dbManager.GetVideoById(videoId);
         }
 
+        public List<YouTubeVideo> SearchVideosByName(DbManager dbManager, string name)
+        {
+            return dbManager.SearchVideosByName(name);
+        }
+
         public void AddVideo(DbManager dbManager, string videoId)
         {
             YouTubeVideo video = new YouTubeController().GetVideo(videoId);

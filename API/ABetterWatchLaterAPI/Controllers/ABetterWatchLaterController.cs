@@ -45,8 +45,8 @@ namespace ABetterWatchLaterAPI.Controllers
             return new ChannelController().GetAllChannels(_dbManager);
         }
 
-        [HttpGet("search")]
-        public IActionResult GetVideo(string videoId)
+        /*[HttpGet("search")]
+        public IActionResult GetVideoById(string videoId)
         {
             YouTubeVideo video = new VideoController().GetVideoById(_dbManager, videoId);
 
@@ -56,6 +56,19 @@ namespace ABetterWatchLaterAPI.Controllers
             }
 
             return Ok(video);      
+        }*/
+
+        [HttpGet("search")]
+        public IActionResult SearchVideosByName(string name)
+        {
+            List<YouTubeVideo> videos = new VideoController().SearchVideosByName(_dbManager, name);
+
+            if (videos == null)
+            {
+                return NoContent();
+            }
+
+            return Ok(videos);
         }
         #endregion
 
