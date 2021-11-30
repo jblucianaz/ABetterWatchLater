@@ -82,7 +82,7 @@ namespace ABetterWatchLaterAPI.Managers
             return video;
         }
 
-        public List<YouTubeVideo> SearchVideosByName(string name)
+        public List<YouTubeVideo> SearchVideosByTitle(string name)
         {
             List<YouTubeVideo> list = new List<YouTubeVideo>();
 
@@ -92,6 +92,34 @@ namespace ABetterWatchLaterAPI.Managers
                 MySqlCommand cmd = new MySqlCommand("SELECT * FROM Video WHERE Title LIKE '%%'", conn);
                 cmd.CommandText = "SELECT * FROM Video WHERE Title LIKE @title";
                 cmd.Parameters.Add(new MySqlParameter("title", $"%{name}%"));
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        list.Add(new YouTubeVideo(
+                            reader["VideoId"].ToString(),
+                            reader["Title"].ToString(),
+                            reader["ChannelId"].ToString(),
+                            reader["Duration"].ToString(),
+                            reader["Tags"].ToString().Split('.').ToList(),
+                            reader["Thumbnail"].ToString()));
+                    }
+                }
+            }
+            return list;
+        }
+
+        public List<YouTubeVideo> SearchVideosChannelId(string channelId)
+        {
+            List<YouTubeVideo> list = new List<YouTubeVideo>();
+
+            using (MySqlConnection conn = GetConnection())
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM Video WHERE ChannelId = '", conn);
+                cmd.CommandText = "SELECT * FROM Video WHERE ChannelId LIKE @channelId";
+                cmd.Parameters.Add(new MySqlParameter("channelId", channelId));
 
                 using (var reader = cmd.ExecuteReader())
                 {

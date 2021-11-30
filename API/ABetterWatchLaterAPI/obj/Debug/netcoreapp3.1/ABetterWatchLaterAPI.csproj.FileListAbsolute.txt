@@ -30,4 +30,3 @@
 /Users/jb/Projets/Dev/ABetterWatchLater/API/ABetterWatchLaterAPI/obj/Debug/netcoreapp3.1/ABetterWatchLaterAPI.dll
 /Users/jb/Projets/Dev/ABetterWatchLater/API/ABetterWatchLaterAPI/obj/Debug/netcoreapp3.1/ABetterWatchLaterAPI.pdb
 /Users/jb/Projets/Dev/ABetterWatchLater/API/ABetterWatchLaterAPI/obj/Debug/netcoreapp3.1/ABetterWatchLaterAPI.genruntimeconfig.cache
-/Users/jb/Projets/Dev/ABetterWatchLater/API/ABetterWatchLaterAPI/obj/Debug/netcoreapp3.1/ABetterWatchLaterAPI.csproj.AssemblyReference.cache

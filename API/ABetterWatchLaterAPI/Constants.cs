@@ -34,7 +34,13 @@ public static class Constants
         public const string TAGS = "tags";
         public const string THUMBNAILS = "thumbnails";
         public const string TITLE = "title";
-        public const string URL = "url";
-         
+        public const string URL = "url";       
+    }
+
+    public static class QueryTypes
+    {
+        public const string BY_CHANNEL_NAME = "By Channel Name";
+        public const string BY_VIDEO_TITLE = "By Video Title";
+        public const string MULTI_SEARCH = "Multi Search";
     }
 }

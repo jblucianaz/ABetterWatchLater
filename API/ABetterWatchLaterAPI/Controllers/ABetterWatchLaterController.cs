@@ -45,23 +45,30 @@ namespace ABetterWatchLaterAPI.Controllers
             return new ChannelController().GetAllChannels(_dbManager);
         }
 
-        /*[HttpGet("search")]
-        public IActionResult GetVideoById(string videoId)
+        [HttpGet("search")]
+        public IActionResult SearchVideos(string videoTitle, string channelName)
         {
-            YouTubeVideo video = new VideoController().GetVideoById(_dbManager, videoId);
+            string query = string.Empty;
+            string queryType = string.Empty;
 
-            if(video == null)
+            if (videoTitle != null)
             {
-                return NoContent();
+                query = videoTitle;
+                queryType = Constants.QueryTypes.BY_VIDEO_TITLE;
             }
 
-            return Ok(video);      
-        }*/
+            if (channelName != null)
+            {
+                query = channelName;
+                queryType = Constants.QueryTypes.BY_CHANNEL_NAME;
+            }
 
-        [HttpGet("search")]
-        public IActionResult SearchVideosByName(string name)
-        {
-            List<YouTubeVideo> videos = new VideoController().SearchVideosByName(_dbManager, name);
+            if ((channelName != null) && (videoTitle != null))
+            {
+                queryType = Constants.QueryTypes.MULTI_SEARCH;
+            }    
+
+            List<YouTubeVideo> videos = new VideoController().SearchVideos(_dbManager, query, queryType);
 
             if (videos == null)
             {

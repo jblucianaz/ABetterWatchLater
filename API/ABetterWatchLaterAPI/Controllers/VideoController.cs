@@ -23,9 +23,13 @@ namespace ABetterWatchLaterAPI.Controllers
              return dbManager.GetVideoById(videoId);
         }
 
-        public List<YouTubeVideo> SearchVideosByName(DbManager dbManager, string name)
+        public List<YouTubeVideo> SearchVideos(DbManager dbManager, string query, string queryType)
         {
-            return dbManager.SearchVideosByName(name);
+            if (queryType == Constants.QueryTypes.BY_VIDEO_TITLE) { return dbManager.SearchVideosByTitle(query); }
+            if (queryType == Constants.QueryTypes.BY_CHANNEL_NAME) { return dbManager.SearchVideosChannelId(query); }
+            if (queryType == Constants.QueryTypes.MULTI_SEARCH) { return dbManager.SearchVideosByTitle(query); }
+
+            return new List<YouTubeVideo>();
         }
 
         public void AddVideo(DbManager dbManager, string videoId)
