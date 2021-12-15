@@ -54,9 +54,9 @@ namespace ABetterWatchLaterAPI.Managers
             using (MySqlConnection conn = GetConnection())
             {
                 conn.Open();
-                MySqlCommand cmd = new MySqlCommand("SELECT * FROM Video WHERE", conn);
-                cmd.CommandText =
-                    "SELECT * FROM Video WHERE VideoId = @videoId";
+                MySqlCommand cmd = new MySqlCommand(
+                    "SELECT * FROM Video WHERE VideoId = @videoId",
+                    conn);
 
                 cmd.Parameters.Add(new MySqlParameter("videoId", videoId));
 
@@ -89,8 +89,10 @@ namespace ABetterWatchLaterAPI.Managers
             using (MySqlConnection conn = GetConnection())
             {
                 conn.Open();
-                MySqlCommand cmd = new MySqlCommand("SELECT * FROM Video WHERE Title LIKE '%%'", conn);
-                cmd.CommandText = "SELECT * FROM Video WHERE Title LIKE @title";
+                MySqlCommand cmd = new MySqlCommand(
+                    "SELECT * FROM Video WHERE Title LIKE @title",
+                    conn);
+
                 cmd.Parameters.Add(new MySqlParameter("title", $"%{name}%"));
 
                 using (var reader = cmd.ExecuteReader())
@@ -117,8 +119,10 @@ namespace ABetterWatchLaterAPI.Managers
             using (MySqlConnection conn = GetConnection())
             {
                 conn.Open();
-                MySqlCommand cmd = new MySqlCommand("SELECT * FROM Video WHERE ChannelId = '", conn);
-                cmd.CommandText = "SELECT * FROM Video WHERE ChannelId LIKE @channelId";
+                MySqlCommand cmd = new MySqlCommand(
+                    "SELECT * FROM Video WHERE ChannelId LIKE @channelId",
+                    conn);
+
                 cmd.Parameters.Add(new MySqlParameter("channelId", channelId));
 
                 using (var reader = cmd.ExecuteReader())
@@ -143,9 +147,10 @@ namespace ABetterWatchLaterAPI.Managers
             using (MySqlConnection conn = GetConnection())
             {
                 conn.Open();
-                MySqlCommand cmd = new MySqlCommand("INSERT INTO () VALUES ()", conn);
-                cmd.CommandText =
-                    "INSERT INTO Video (VideoId, Title, Url, ChannelId, Duration, Tags, Thumbnail) VALUES (@videoId, @title, @url, @channelId, @duration, @tags, @thumbnail)";
+                MySqlCommand cmd = new MySqlCommand(
+                    @"INSERT INTO Video (VideoId, Title, Url, ChannelId, Duration, Tags, Thumbnail)
+                    VALUES (@videoId, @title, @url, @channelId, @duration, @tags, @thumbnail)",
+                    conn);
                 
                 cmd.Parameters.Add(new MySqlParameter("videoId", video.VideoId));
                 cmd.Parameters.Add(new MySqlParameter("title", video.Title));
@@ -171,9 +176,9 @@ namespace ABetterWatchLaterAPI.Managers
             using (MySqlConnection conn = GetConnection())
             {
                 conn.Open();
-                MySqlCommand cmd = new MySqlCommand("DELETE FROM Video WHERE", conn);
-                cmd.CommandText =
-                    "DELETE FROM Video WHERE VideoId = @videoId";
+                MySqlCommand cmd = new MySqlCommand(
+                    "DELETE FROM Video WHERE VideoId = @videoId",
+                    conn);
 
                 cmd.Parameters.Add(new MySqlParameter("videoId", videoId));
 
@@ -196,7 +201,9 @@ namespace ABetterWatchLaterAPI.Managers
             using (MySqlConnection conn = GetConnection())
             {
                 conn.Open();
-                MySqlCommand cmd = new MySqlCommand("SELECT * FROM Channel", conn);
+                MySqlCommand cmd = new MySqlCommand(
+                    "SELECT * FROM Channel",
+                    conn);
 
                 using (var reader = cmd.ExecuteReader())
                 {
@@ -219,9 +226,9 @@ namespace ABetterWatchLaterAPI.Managers
             using (MySqlConnection conn = GetConnection())
             {
                 conn.Open();
-                MySqlCommand cmd = new MySqlCommand("SELECT * FROM Channel WHERE", conn);
-                cmd.CommandText =
-                    "SELECT * FROM Channel WHERE ChannelId = @channelId";
+                MySqlCommand cmd = new MySqlCommand(
+                    "SELECT * FROM Channel WHERE ChannelId = @channelId",
+                    conn);
 
                 cmd.Parameters.Add(new MySqlParameter("channelId", channelId));
 
@@ -244,9 +251,10 @@ namespace ABetterWatchLaterAPI.Managers
             using (MySqlConnection conn = GetConnection())
             {
                 conn.Open();
-                MySqlCommand cmd = new MySqlCommand("INSERT INTO () VALUES ()", conn);
-                cmd.CommandText =
-                    "INSERT INTO Channel (ChannelId, Name, Thumbnail) VALUES (@channelId, @name, @thumbnail)";
+                MySqlCommand cmd = new MySqlCommand(
+                    @"INSERT INTO Channel(ChannelId, Name, Thumbnail)
+                    VALUES(@channelId, @name, @thumbnail)",
+                    conn);
 
                 cmd.Parameters.Add(new MySqlParameter("channelId", channel.ChannelId));
                 cmd.Parameters.Add(new MySqlParameter("name", channel.Name));
@@ -267,9 +275,9 @@ namespace ABetterWatchLaterAPI.Managers
             using (MySqlConnection conn = GetConnection())
             {
                 conn.Open();
-                MySqlCommand cmd = new MySqlCommand("DELETE FROM Channel WHERE", conn);
-                cmd.CommandText =
-                    "DELETE FROM Channel WHERE ChannelId = @channelId";
+                MySqlCommand cmd = new MySqlCommand(
+                    "DELETE FROM Channel WHERE ChannelId = @channelId",
+                    conn);
 
                 cmd.Parameters.Add(new MySqlParameter("channelId", channelId));
 
@@ -288,9 +296,9 @@ namespace ABetterWatchLaterAPI.Managers
             using (MySqlConnection conn = GetConnection())
             {
                 conn.Open();
-                MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM Channel WHERE", conn);
-                cmd.CommandText =
-                    "SELECT COUNT(*) FROM Channel WHERE ChannelId = @channelId";
+                MySqlCommand cmd = new MySqlCommand(
+                    "SELECT COUNT(*) FROM Channel WHERE ChannelId = @channelId",
+                    conn);
 
                 cmd.Parameters.Add(new MySqlParameter("channelId", channelId));
 
@@ -314,9 +322,9 @@ namespace ABetterWatchLaterAPI.Managers
             using (MySqlConnection conn = GetConnection())
             {
                 conn.Open();
-                MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM Channel WHERE", conn);
-                cmd.CommandText =
-                    "SELECT COUNT(*) FROM Video WHERE ChannelId = @channelId";
+                MySqlCommand cmd = new MySqlCommand(
+                    "SELECT COUNT(*) FROM Video WHERE ChannelId = @channelId",
+                    conn);
 
                 cmd.Parameters.Add(new MySqlParameter("channelId", channelId));
 

@@ -2,11 +2,10 @@
   <MonoDevelop.Ide.Workbench ActiveDocument="Controllers/ABetterWatchLaterController.cs">
     <Files>
       <File FileName="Controllers/YouTubeController.cs" Line="79" Column="23" />
-      <File FileName="Controllers/VideoController.cs" Line="33" Column="10" />
-      <File FileName="Controllers/ABetterWatchLaterController.cs" Line="60" Column="23" />
-      <File FileName="Managers/DbManager.cs" Line="85" Column="54" />
-      <File FileName="Constants.cs" />
-      <File FileName="Controllers/ChannelController.cs" Line="13" Column="10" />
+      <File FileName="Controllers/VideoController.cs" />
+      <File FileName="Controllers/ABetterWatchLaterController.cs" Line="52" Column="1" />
+      <File FileName="Managers/DbManager.cs" Line="323" Column="14" />
+      <File FileName="Controllers/ChannelController.cs" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -23,6 +22,11 @@
               <Node name="Models" expanded="True" />
             </Node>
           </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State>
+          <Value>cmd</Value>
         </State>
       </Pad>
     </Pads>
