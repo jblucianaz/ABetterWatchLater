@@ -1,11 +1,9 @@
 ﻿<Properties StartupConfiguration="{EE890FE9-7F09-463D-B1D3-D238B73FE82A}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Controllers/ABetterWatchLaterController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Managers/DbManager.cs">
     <Files>
-      <File FileName="Controllers/YouTubeController.cs" Line="79" Column="23" />
-      <File FileName="Controllers/VideoController.cs" />
-      <File FileName="Controllers/ABetterWatchLaterController.cs" Line="52" Column="1" />
+      <File FileName="Controllers/VideoController.cs" Line="29" Column="101" />
+      <File FileName="Controllers/ABetterWatchLaterController.cs" Line="43" Column="51" />
       <File FileName="Managers/DbManager.cs" Line="323" Column="14" />
-      <File FileName="Controllers/ChannelController.cs" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -15,10 +13,10 @@
               <Node name="Dependencies" expanded="True">
                 <Node name="PackageDependencies" expanded="True" />
               </Node>
-              <Node name="Controllers" expanded="True">
-                <Node name="ABetterWatchLaterController.cs" selected="True" />
+              <Node name="Controllers" expanded="True" />
+              <Node name="Managers" expanded="True">
+                <Node name="DbManager.cs" selected="True" />
               </Node>
-              <Node name="Managers" expanded="True" />
               <Node name="Models" expanded="True" />
             </Node>
           </Node>

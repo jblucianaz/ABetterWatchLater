@@ -112,7 +112,7 @@ namespace ABetterWatchLaterAPI.Managers
             return list;
         }
 
-        public List<YouTubeVideo> SearchVideosChannelId(string channelId)
+        public List<YouTubeVideo> SearchVideosByChannelId(string channelId)
         {
             List<YouTubeVideo> list = new List<YouTubeVideo>();
 
@@ -124,6 +124,38 @@ namespace ABetterWatchLaterAPI.Managers
                     conn);
 
                 cmd.Parameters.Add(new MySqlParameter("channelId", channelId));
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        list.Add(new YouTubeVideo(
+                            reader["VideoId"].ToString(),
+                            reader["Title"].ToString(),
+                            reader["ChannelId"].ToString(),
+                            reader["Duration"].ToString(),
+                            reader["Tags"].ToString().Split('.').ToList(),
+                            reader["Thumbnail"].ToString()));
+                    }
+                }
+            }
+            return list;
+        }
+
+        public List<YouTubeVideo> SearchVideosByChannelName(string channelName)
+        {
+            List<YouTubeVideo> list = new List<YouTubeVideo>();
+
+            using (MySqlConnection conn = GetConnection())
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand(
+                    @"SELECT * FROM Video
+                    INNER JOIN Channel ON Video.ChannelId = Channel.ChannelId
+                    WHERE Channel.Name LIKE @channelName",
+                    conn);
+
+                cmd.Parameters.Add(new MySqlParameter("channelName", $"%{channelName}%"));
 
                 using (var reader = cmd.ExecuteReader())
                 {
